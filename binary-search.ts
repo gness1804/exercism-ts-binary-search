@@ -6,6 +6,17 @@ export default class BinarySearch {
   }
 
   generateArray(arr: number[]): number[] | undefined {
-    return JSON.stringify(arr) === JSON.stringify(arr.sort()) ? arr : undefined;
+    return JSON.stringify(arr) ===
+      JSON.stringify(
+        arr.sort((a, b) => {
+          if (a < b) return -1;
+          else if (a > b) {
+            return 1;
+          }
+          return 0;
+        })
+      )
+      ? arr
+      : undefined;
   }
 }
