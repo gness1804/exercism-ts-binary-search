@@ -24,11 +24,14 @@ export const getIndex = (arr: number[], target: number): number | undefined => {
   } else {
     startingIndex = Math.ceil(arr.length / 2) - 1;
   }
-
   const selectedNumber = arr[startingIndex];
+
   if (selectedNumber === target) return startingIndex;
 
-  const newArr = selectedNumber < target ? arr.slice(0, startingIndex) : arr.slice(startingIndex + 1);
+  const newArr =
+    selectedNumber > target
+      ? arr.slice(0, startingIndex)
+      : arr.slice(startingIndex + 1);
 
-  getIndex(newArr, target);
+  return getIndex(newArr, target);
 };
