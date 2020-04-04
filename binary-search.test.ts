@@ -1,34 +1,4 @@
 import BinarySearch from "./binary-search"
-import { getIndex } from './scratch';
-
-describe('scratch function', () => {
-  // return undefined for unsorted array
-  // return undefined for empty array
-  // return the target index
-
-  it('should just return the index when it is the index of the target initially', () => {
-    const arr = [1, 3, 6, 8, 9, 10, 12, 14, 32];
-    const target = 9;
-    const result = getIndex(arr, target);
-    expect(result).toEqual(4)
-  });
-
-  it('should return the index of a number for an even numbered array', () => {
-    // length === 8;
-    const arr = [1, 3, 6, 8, 9, 10, 12, 14];
-    const target = 12;
-    const result = getIndex(arr, target);
-    expect(result).toEqual(6);
-  });
-
-  it('should return the index of a number for an odd numbered array', () => {
-    // length === 9
-    const arr = [1, 3, 6, 8, 9, 10, 12, 14, 32];
-    const target = 3;
-    const result = getIndex(arr, target);
-    expect(result).toEqual(1)
-  });
-});
 
 describe("BinarySearch", () => {
   const sortedArray = [1, 2, 3, 4, 5, 6]
