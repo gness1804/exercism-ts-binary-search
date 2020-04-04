@@ -59,6 +59,7 @@
       }
     ], // Prevent bugs, not styling
     "semi": "off", // Always disable base-rule
-    "@typescript-eslint/semi": "off" // Styling not forced upon student
+    "@typescript-eslint/semi": "off", // Styling not forced upon student
+    "no-console": "error"
   }
 }

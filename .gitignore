@@ -114,9 +114,7 @@ dist
 .yarn/build-state.yml
 .pnp.*
 
-  # Editor-specific files
-    .vscode/
-    .idea/
-  # DS Store
-    .DS_Store
+.vscode/*
+.idea/*
+.DS_Store
 
