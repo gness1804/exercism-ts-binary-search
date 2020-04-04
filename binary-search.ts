@@ -54,7 +54,7 @@ export default class BinarySearch {
         return handleLoop([...newArr.slice(startingIndex, endingIndex)]);
       } else {
         // middleIndexNumber > targetNumber; we just want the front part of the array
-        endingIndex = newArr.indexOf(newArr[middleIndex - 1]);
+        endingIndex = newArr.indexOf(newArr[middleIndex]);
         return handleLoop([...newArr.slice(startingIndex, endingIndex)]);
       }
     };
