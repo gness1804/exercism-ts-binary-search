@@ -45,6 +45,12 @@ export default class BinarySearch {
 
       if (middleIndexNumber === targetNumber) {
         // we want the index of the found middleIndexNumber in the ORIGINAL array.
+        const middleIndexNumberHasClones =
+          newArr.filter((num) => num === middleIndexNumber).length > 1;
+        if (middleIndexNumberHasClones) {
+          // there are clones of the middleIndexNumber; just return the middleIndex itself
+          return middleIndex;
+        }
         return originalArray.indexOf(middleIndexNumber);
       }
 
