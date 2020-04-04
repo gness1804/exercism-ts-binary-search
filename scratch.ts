@@ -10,30 +10,48 @@ const isSorted = (arr: number[]): boolean =>
     })
   );
 
-export const getIndex = (arr: number[], target: number): number | undefined => {
-  if (!isSorted(arr)) return undefined;
-  if (!arr.length) return undefined;
-  if (arr.length === 1) return arr.indexOf(target);
-
+export const getIndex = (
+  arr: number[],
+  targetNumber: number
+): number | Error => {
+  if (!isSorted(arr)) return new Error("Error: array is not sorted.");
+  if (!arr.length)
+    return new Error(
+      "Error: empty array. Array needs at least one number in it."
+    );
+  if (arr.length === 1) return arr.indexOf(targetNumber);
 
   let startingIndex = 0;
   let endingIndex = arr.length - 1;
+  const originalArray = arr;
 
-  const findIndexInner = (): number => {
+  const handleLoop = (newArr: number[]): number | Error => {
+    const middleIndex = Math.ceil((newArr.length - 1) / 2);
+    const middleIndexNumber = newArr[middleIndex];
 
-    const middleIndex = Math.floor((startingIndex + endingIndex) / 2);
+    if (!newArr.includes(middleIndexNumber) || !newArr.includes(targetNumber)) {
+      return new Error("Number not found.");
+    }
 
-    const selectedNumber = arr[middleIndex];
+    if (middleIndexNumber === targetNumber) {
+      // we want to index of the found middleIndexNumber in the ORIGINAL array.
+      return originalArray.indexOf(middleIndexNumber);
+    }
 
-    if (selectedNumber === target) return middleIndex;
-
-    if (selectedNumber > target) {
-      startingIndex = middleIndex + 1;
-      return findIndexInner();
-    } else {
-      endingIndex = middleIndex - 1;
-      return findIndexInner();
+    try {
+      if (middleIndexNumber < targetNumber) {
+        // we just want the back part of the array
+        startingIndex = newArr.indexOf(newArr[middleIndex + 1]);
+        return handleLoop([...newArr.slice(startingIndex, endingIndex)]);
+      } else {
+        // middleIndexNumber > targetNumber; we just want the front part of the array
+        endingIndex = newArr.indexOf(newArr[middleIndex - 1]);
+        return handleLoop([...newArr.slice(startingIndex, endingIndex)]);
+      }
+    } catch (error) {
+      return new Error(`Error in handleLoop: ${error}`);
     }
   };
-  findIndexInner();
+
+  return handleLoop(arr);
 };
