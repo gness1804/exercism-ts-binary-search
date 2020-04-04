@@ -15,23 +15,25 @@ export const getIndex = (arr: number[], target: number): number | undefined => {
   if (!arr.length) return undefined;
   if (arr.length === 1) return arr.indexOf(target);
 
+
   let startingIndex = 0;
+  let endingIndex = arr.length - 1;
 
-  const arrLenIsEven = !(arr.length % 2);
+  const findIndexInner = (): number => {
 
-  if (arrLenIsEven) {
-    startingIndex = arr.length / 2;
-  } else {
-    startingIndex = Math.ceil(arr.length / 2) - 1;
-  }
-  const selectedNumber = arr[startingIndex];
+    const middleIndex = Math.floor((startingIndex + endingIndex) / 2);
 
-  if (selectedNumber === target) return startingIndex;
+    const selectedNumber = arr[middleIndex];
 
-  const newArr =
-    selectedNumber > target
-      ? arr.slice(0, startingIndex)
-      : arr.slice(startingIndex + 1);
+    if (selectedNumber === target) return middleIndex;
 
-  return getIndex(newArr, target);
+    if (selectedNumber > target) {
+      startingIndex = middleIndex + 1;
+      return findIndexInner();
+    } else {
+      endingIndex = middleIndex - 1;
+      return findIndexInner();
+    }
+  };
+  findIndexInner();
 };
